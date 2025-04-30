@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rocket Frontend</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 2rem;
+            background: #f2f2f2;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 500px;
+            margin: auto;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1 id="title">Loading...</h1>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        // Fetch data from the Rust backend
+        fetch("/api/data")
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById("title").textContent = data.title;
+                document.getElementById("message").textContent = data.message;
+            })
+            .catch(err => {
+                document.getElementById("title").textContent = "Error";
+                document.getElementById("message").textContent = "Could not load data.";
+                console.error(err);
+            });
+    </script>
+</body>
+</html>

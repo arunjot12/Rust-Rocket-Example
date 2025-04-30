@@ -1,32 +1,29 @@
-// Import Rocket macros globally
 #[macro_use] extern crate rocket;
+use rocket::fs::{FileServer, relative};
+use rocket::serde::json::Json;
+use rocket::serde::{Serialize};
 
-// This handler responds to GET requests at "/"
-#[get("/")]  // <-- Match browser requests too
-fn index() -> &'static str {
-    "Home"  // HTML content
+// Define a simple struct to send as JSON
+#[derive(Serialize)]
+#[serde(crate = "rocket::serde")]
+struct Info {
+    title: String,
+    message: String,
 }
 
-// This handler responds to GET requests at "/about"
-#[get("/about")]
-fn about() -> &'static str {
-    "About"
+// Return a JSON object at GET /data
+#[get("/data")]
+fn data() -> Json<Info> {
+    Json(Info {
+        title: "Welcome to Rocket!".into(),
+        message: "This content is served from Rust backend.".into(),
+    })
 }
 
-// This handler responds to GET requests at "/contact"
-#[get("/contact")]
-fn contact() -> &'static str {
-    "Contact"
-}
-
-// This is the Rocket launch function
-// It builds a Rocket instance and mounts all routes under "/"
+// Launch the Rocket app and serve static + routes
 #[launch]
 fn rocket() -> _ {
     rocket::build()
-        .mount("/", routes![index, about, contact])
-        // This means:
-        //   GET /          → index()
-        //   GET /about     → about()
-        //   GET /contact   → contact()
+        .mount("/", FileServer::from(relative!("static"))) // Serves index.html
+        .mount("/api", routes![data])                      // API route
 }
