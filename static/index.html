@@ -9,6 +9,20 @@
             padding: 2rem;
             background: #f2f2f2;
         }
+        .rocket{
+         display: box;
+            align-items: center;
+            margin-bottom: 20px;
+            width: 50px;
+           
+        }
+        .rocket img {
+            width: 100px; /* Adjust the size as needed */
+            height: auto;
+            background-color: #e0f7fa; /* Optional background */
+            padding: 10px; /* Optional padding */
+            border-radius: 12px; /* Optional rounded background */
+        }
         .card {
             background: white;
             padding: 20px;
@@ -41,12 +55,15 @@
 </head>
 <body>
     <div class="card">
+        <div class = "rocket"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUCZ8WHY9l935ODGLtzLHyhSjVKnw9Nth37Q&s" alt="Rocket"></div>
         <h1 id="title">Loading...</h1>
         <p id="message"></p>
 
         <input type="text" id="name" placeholder="Your Name" />
         <textarea id="feedback" placeholder="Your Feedback"></textarea>
-        <button onclick="sendFeedback()">Submit</button>
+        <!--   <button type="submit" class="btn btn-primary">Submit</button> -->
+        <button type ="submit"  class="btn btn-primary" onclick="sendFeedback()">Submit</button>
+    </div>
     </div>
 
     <script>
