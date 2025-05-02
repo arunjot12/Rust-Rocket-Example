@@ -24,7 +24,7 @@ struct InputData {
 #[get("/data")]
 fn data() -> Json<Info> {
     Json(Info {
-        title: "Welcome to Rocket!".into(),
+        title: "Rocket FrontEnd".into(),
         message: "This content is served from Rust backend.".into(),
     })
 }
